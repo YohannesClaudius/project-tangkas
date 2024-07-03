@@ -46,7 +46,76 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 ),
                 color: Colors.white,
               ),
-              
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      CustomTag(
+                        backgroundColor: Colors.black,
+                        children: [
+                          CircleAvatar(
+                            radius: 10,
+                            backgroundImage: AssetImage(article.authorImgUrl),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            article.author,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(color: Colors.white),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      CustomTag(
+                        backgroundColor: Colors.grey.shade200,
+                        children: [
+                          const Icon(
+                            Icons.date_range,
+                            color: Colors.grey,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            DateFormat('dd/MM/yyyy').format(article.createdAt),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    article.title,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    article.body,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(height: 1.5),
+                  )
+                ],
+              ),
+            
             )
           ],
         ),
