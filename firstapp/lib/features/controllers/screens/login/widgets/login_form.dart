@@ -135,7 +135,71 @@ class _LoginFormState extends State<LoginForm> {
             const SizedBox(
               height: 10,
             ),
-            
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Validasi email
+                  if (_emailController.text.isEmpty) {
+                    setState(() {
+                      _emailErrorText = 'Email cannot be empty';
+                    });
+                  } else if (_emailController.text != _email) {
+                    setState(() {
+                      _emailErrorText = 'Email is incorrect';
+                    });
+                  } else {
+                    _emailErrorText = null;
+                  }
+ 
+                  // Validasi password
+                  if (_passwordController.text.isEmpty &&
+                      _emailController.text == _email) {
+                    setState(() {
+                      _passwordErrorText = 'Password cannot be empty';
+                    });
+                  } else if (_passwordController.text != _password &&
+                      _emailController.text == _email) {
+                    setState(() {
+                      _passwordErrorText = 'Password is incorrect';
+                    });
+                  } else {
+                    _passwordErrorText = null;
+                  }
+ 
+                  // Jika email dan password valid, lanjutkan proses login
+                  if (_emailController.text == _email &&
+                      _passwordController.text == _password) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const Center(child: CircularProgressIndicator(color: Colors.black,));
+                      },
+                    );
+ 
+                    Future.delayed(const Duration(seconds: 2), () {
+                      Navigator.of(context).pop();
+ 
+                      Get.to(() => const HomeScreen());
+                    });
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14)),
+                  padding: const EdgeInsets.all(16),
+                  backgroundColor: Colors.black,
+                ),
+                child: const Text(
+                  TTexts.signIn,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+ 
             const SizedBox(
               height: 16,
             ),
